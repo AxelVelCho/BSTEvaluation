@@ -15,15 +15,14 @@ namespace BSTCodeChallenge.DataAccess.Data
 
         public LMDB()
         {
-            var path = "./LMDB/";
-            _env = new LightningEnvironment(path);
-            _env.MaxDatabases = 2;
-            _env.Open();
         }
 
         private (LightningTransaction? tr , LightningDatabase db , LightningCursor csr) Initialize(string action)
         {
-
+            var path = "./LMDB/";
+            _env = new LightningEnvironment(path);
+            _env.MaxDatabases = 2;
+            _env.Open();
             var tr = _env.BeginTransaction();
             var db = tr.OpenDatabase(dbname);
             switch (action)
